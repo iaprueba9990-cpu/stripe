@@ -18,7 +18,7 @@ def pagar():
             "price": os.getenv("PRICE_ID"),
             "quantity": 1,
         }],
-        success_url="https://tusitio.web.app/#/success",
-        cancel_url="https://tusitio.web.app/#/cancel",
+        success_url="https://contador-64f9c.web.app/#/perfil",
+        cancel_url="https://contador-64f9c.web.app/#/perfils",
     )
     return {"url": session.url}
