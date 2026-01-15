@@ -19,6 +19,6 @@ def pagar():
             "quantity": 1,
         }],
         success_url="https://contador-64f9c.web.app/#/pagoexitoso",
-        cancel_url="https://contador-64f9c.web.app/#/perfils",
+        cancel_url="https://contador-64f9c.web.app/#/pagonoexitoso",
     )
     return {"url": session.url}
