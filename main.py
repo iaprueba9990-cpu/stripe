@@ -28,7 +28,7 @@ def pagar():
             "price": os.getenv("PRICE_ID"),
             "quantity": 1,
         }],
-        success_url="https://contador-64f9c.web.app/#/pagoexitoso",
-        cancel_url="https://contador-64f9c.web.app/#/pagonoexitoso",
+        success_url="https://tatuador-d594e.web.app/#/pagoexitoso",
+        cancel_url="https://tatuador-d594e.web.app/#/pagonoexitoso",
     )
     return {"url": session.url}
