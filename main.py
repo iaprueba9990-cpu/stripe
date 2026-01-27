@@ -1,14 +1,13 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 import stripe
 import os
 
 app = FastAPI()
 
-# 🔓 CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # luego lo restringimos
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -16,19 +15,18 @@ app.add_middleware(
 
 stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
 
-@app.get("/")
-def home():
-    return {"ok": True}
-
 @app.get("/pagar")
-def pagar():
+def pagar(
+    success_url: str = Query(...),
+    cancel_url: str = Query(...)
+):
     session = stripe.checkout.Session.create(
         mode="payment",
         line_items=[{
             "price": os.getenv("PRICE_ID"),
             "quantity": 1,
         }],
-        success_url="https://tatuador-d594e.web.app/#/pagoexitoso",
-        cancel_url="https://tatuador-d594e.web.app/#/pagonoexitoso",
+        success_url=success_url,
+        cancel_url=cancel_url,
     )
     return {"url": session.url}
