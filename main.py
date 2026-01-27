@@ -1,8 +1,18 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 import stripe
 import os
 
 app = FastAPI()
+
+# 🔓 CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # luego lo restringimos
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
 
